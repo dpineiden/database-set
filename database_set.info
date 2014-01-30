@@ -1,0 +1,9 @@
+name = Database Set
+description = Permite definir y configurar el acceso a distintas bases de datos alojadas en diferentes servidores, asignándole un Código Identificador que posteriormente pueda ser asociado a un usuario o grupo.
+core = 7.x
+version = 7.x-1.0
+package = Scientific
+dependencies[] = entity
+files[] = database_set.module
+stylesheets[all][] = css/db_set.css
+configure = admin/config/dabase_set

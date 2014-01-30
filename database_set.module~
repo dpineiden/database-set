@@ -1,0 +1,37 @@
+<?php 
+
+/**
+* Se implementa hook_help
+*/
+
+function database_set_help($path, $arg) {
+  switch($path){
+    case "admin/help#database_set":
+    return '<div>' . t("<p>Configura distintas
+bases de datos, permitiendo el acceso a la
+lectura de la información dispuesta en ellas.</p>
+<p>
+Es necesario que consigas los 
+datos de: nombre de base de datos,usuario con acceso a db, password, 
+puerto de conexión, dirección de servidor de base de datos.</p>
+<p>
+Esto permitira que asocies un nombre de entidad a un set 
+de datos de configuración par acceder a cierta database.")  . '</div>';
+
+    break;
+  }
+}
+
+/**
+* Se inmplementa hook_info que describe en detalle como configurar
+*/
+
+function database_set_info() {
+  $blocks['database_set'] = array(
+  //mostrar el conjunto de base de datos asociadas
+  //a un usuario o grupo
+    'info' => t('Database Set'),
+    'cache' => DRUPAL_CACHE_PER_USER,    
+  );
+  return $blocks;
+}
