@@ -23,7 +23,7 @@ de datos de configuración par acceder a cierta database.")  . '</div>';
 }
 
 /**
-* Se inmplementa hook_info que describe en detalle como configurar
+* Se implementa hook_info que describe en detalle como configurar
 */
 
 function database_set_info() {
@@ -35,3 +35,47 @@ function database_set_info() {
   );
   return $blocks;
 }
+
+/**
+* Para conocer el nombre de host y nro de puerto, consultar:
+*SHOW VARIABLES
+*WHERE Variable_name IN (
+*'hostname',
+*'port')
+* Síntaxis DB
+*$databases['default']['default'] = array(
+*  'driver' => 'mysql',  //sqlite, postgre, etc
+*  'database' => 'drupaldb',
+*  'username' => 'username',
+*  'password' => 'secret',
+*  'host' => 'localhost',
+*);
+* Se define una base de datos admin que puede generar consultar SQL
+* a  partir de un recuadro de texto, en el que se posibilita generar 
+* asignaciones y sql deseado (static query)
+* $result = $conn->query("SELECT nid, title FROM {node}");
+* $result = db_query("SELECT nid, title FROM {node}");
+* $result = Database::getConnection()->query("SELECT nid, title FROM {node}");
+* Insersion de un literal:
+*$result = db_query("SELECT nid, title FROM {node} WHERE created > :created", array(
+*  ':created' => REQUEST_TIME - 3600,
+*));
+* https://drupal.org/node/310071
+* Generar conexion DB: 
+* $conn = Database::getConnection();
+* Habilitar db especifica: 
+* In static queries, all table names must be wrapped in {}
+* db_set_active($key);
+*/
+/* Usar el resultado de consulta
+*  $sql = "SELECT name, quantity FROM goods WHERE vid = :vid";
+*  $result = db_query($sql, array(':vid' => $vid));
+*  if ($result) {
+*    while ($row = $result->fetchAssoc()) {
+*      // Do something with:
+*      //    $row['name']
+*      //    $row['quantity']
+*    }
+*  }
+  */
+
